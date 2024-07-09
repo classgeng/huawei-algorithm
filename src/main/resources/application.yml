@@ -1,0 +1,6 @@
+server:
+  # ????HTTP??
+  port: 8088
+spring:
+  application:
+    name: huawei-algorithm
