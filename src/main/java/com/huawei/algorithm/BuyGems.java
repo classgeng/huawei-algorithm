@@ -72,7 +72,7 @@ public class BuyGems {
         }
         // 先整个数组排一遍，找出left的位置，左边是比left小的，右边是比left大的
         int p = partition(arr, left, right);
-        quickSort(arr,left,p-1); // 继续同一样的方法排左边
+        quickSort(arr,left,p-1); // 继续同样的方法排左边
         quickSort(arr,p+1,right); // 继续同样的方法排右边
     }
 
@@ -88,8 +88,8 @@ public class BuyGems {
         int left = start;
         int temp;
         for (int i=start+1; i<=end; i++){
-            if(arr[i] <= pivot){
-                left++;//左移
+            if(pivot >= arr[i]){
+                left++;//开始左移
                 temp = arr[left];
                 arr[left] = arr[i];
                 arr[i] = temp;

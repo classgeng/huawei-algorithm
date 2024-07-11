@@ -22,7 +22,9 @@ public class QuickSort {
             return;
         }
         int p = partition(arr,start,end);
+        //左边排序
         quickSort(arr,start,p-1);
+        //右边排序
         quickSort(arr,p+1,end);
     }
 
@@ -34,19 +36,23 @@ public class QuickSort {
      * @return
      */
     public static int partition(int[] arr, int start, int end){
-        int flag = arr[start];
+        int leftValue = arr[start];
         int left = start;
         int temp;
         for (int i = start+1; i<=end; i++){
-            if(arr[i] <= flag){
-                left++;
+            if(leftValue >= arr[i]){
+                left++;// 开始左移
+                if(i == left){
+                    continue;
+                }
                 temp = arr[left];
                 arr[left] = arr[i];
                 arr[i] = temp;
             }
         }
+        //
         arr[start] = arr[left];
-        arr[left] = flag;
+        arr[left] = leftValue;
         return left;
     }
 

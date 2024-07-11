@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import java.util.stream.IntStream;
 
 /**
- * 数组排序
+ * 数组排序 -> 去重
  * 给定一个数组，编写一个函数来计算它的最大N个数与最小N个数的和。你需要对数组进行去重。
  *
  * 说明：

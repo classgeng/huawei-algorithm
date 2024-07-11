@@ -39,11 +39,13 @@ public class CountPeak {
     public static int countPeak(int[] arr){
         int count = 0;
         for (int i=1; i<arr.length-1; i++){
-            if (arr[i] > arr[i-1] && arr[i] > arr[i+1]) {
+            int curr = arr[i];
+            if (curr > arr[i-1] && curr > arr[i+1]) {
                 count++;
             }
         }
 
+        //计算边界
         if(arr[0] > arr[1]){
             count++;
         }

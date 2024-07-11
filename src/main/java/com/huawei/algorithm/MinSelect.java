@@ -22,7 +22,7 @@ public class MinSelect {
 
 
     /**
-     * 最小速度
+     * 二分查找-最小速度
      * @param peaches
      * @param h
      * @return

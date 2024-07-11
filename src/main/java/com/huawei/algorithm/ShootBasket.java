@@ -15,7 +15,7 @@ public class ShootBasket {
     public static void main(String[] args) {
         int[] pushList = {1,2,3,4,5};
         int[] popList = {3,1,2,4,5};
-        popOrder1(pushList, popList);
+        popOrder(pushList, popList);
     }
 
 
@@ -24,7 +24,7 @@ public class ShootBasket {
      * @param pushList  // 入队顺序
      * @param popList   // 出队顺序
      */
-    public static void popOrder1(int[] pushList, int[] popList){
+    public static void popOrder(int[] pushList, int[] popList){
         StringBuilder popOrder = new StringBuilder();
         // 双向链表
         LinkedList<Integer> queue = new LinkedList<>();
