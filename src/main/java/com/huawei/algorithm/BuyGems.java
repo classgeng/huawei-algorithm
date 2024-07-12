@@ -24,8 +24,6 @@ public class BuyGems {
         if(null == gems || gems.length == 0){
             return 0;
         }
-        // 先根据宝石价格排序
-        dubbleSort(gems);
         // 再循环累加
         int total = 0;
         for (int i=0; i<gems.length; i++){
@@ -84,19 +82,25 @@ public class BuyGems {
      * @return
      */
     public static int partition(int[] arr, int start, int end){
-        int pivot = arr[start]; // 每次都跟最开始的数比较
+        int pValue = arr[start]; // 每次都跟最开始的数比较
         int left = start;
         int temp;
         for (int i=start+1; i<=end; i++){
-            if(pivot >= arr[i]){
+            if(pValue >= arr[i]){
                 left++;//开始左移
+                if(i == left){
+                    continue;
+                }
                 temp = arr[left];
                 arr[left] = arr[i];
                 arr[i] = temp;
             }
         }
+        if(start == left){
+            return left;
+        }
         arr[start] = arr[left];
-        arr[left] = pivot;
+        arr[left] = pValue;
         return left;
     }
 

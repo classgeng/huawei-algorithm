@@ -1,6 +1,8 @@
 package com.huawei.algorithm;
 
 
+import java.util.Arrays;
+
 /**
  * 给一个正整数列 nums，一个跳数 jump，及幸存数量 left。运算过程为：从索引为0的位置开始向后跳，中间跳过 J 个数字，命中索引为J+1的数字，
  * 该数被敲出，并从该点起跳，以此类推，直到幸存left个数为止。然后返回幸存数之和。
@@ -19,10 +21,10 @@ package com.huawei.algorithm;
 public class JumpGame {
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 5};
-        int jump = 2;
+        int[] nums = {1, 2, 3, 4, 5, 6};
+        int jump = 3;
         int left = 3;
-        System.out.println(surviveSum(nums,jump,left));
+        System.out.println(jump(nums,jump,left));
     }
 
     /**
@@ -33,68 +35,37 @@ public class JumpGame {
      * @return
      */
     public static int jump(int[]nums, int jump, int left) {
+        int len = nums.length;
+        if(left >= len){
+            return Arrays.stream(nums).sum();
+        }
+        int removeCount = 0; // 记录跳跃次数，每跳跃一次就移除一个幸存数
+        int nextIndex = 1; // 记录下次跳跃的起始位置(移除位置)
+        // 记录是否被移除,true移除,false幸存
+        boolean[] flag = new boolean[len];
+        while(left != len-removeCount){
+            removeCount++;
+
+            while (flag[nextIndex]){ //跳过已经移除的
+                nextIndex++;
+                if(nextIndex >= len){
+                    nextIndex = 0;
+                }
+            }
+            nextIndex = (nextIndex + jump) % len; //循环数组下标
+            while (flag[nextIndex]){ //跳过已经移除的
+                nextIndex++;
+                if(nextIndex >= len){
+                    nextIndex = 0;
+                }
+            }
+            flag[nextIndex] = true;
+        }
         int sum = 0;
-        if(left > nums.length){
-            for (int num:nums){
-                sum +=num;
-            }
-            return sum;
-        }
-        int count = 0; // 记录跳跃次数，每跳跃一次就移除一个幸存数
-        int index = 0; // 记录下次跳跃的起始位置
-        // 记录是否被移除
-        boolean[] flag = new boolean[nums.length];
-        while(count < left){
-            count++;
-            if(index > nums.length){
-                index = index - nums.length; //循环
-            }
-            flag[jump + 1] = true;
-            index += jump + 1;
-
-        }
-
-        return sum;
-    }
-
-
-
-    public static int surviveSum(int[] nums, int jump, int left) {
-        int n = nums.length;
-        if (left > n) {
-            return sum(nums);
-        }
-
-        int count = 0;
-        int index = 0;
-        boolean[] visited = new boolean[n];
-
-        while (count< left) {
-            visited[index] = true;
-            count++;
-
-            int nextIndex = (index + jump) % n;
-            while (visited[nextIndex]) {
-                nextIndex = (nextIndex + jump) % n;
-            }
-
-            index = nextIndex;
-        }
-
-        int sum = 0;
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
+        for(int i=0;i<len; i++){
+            if(!flag[i]){
                 sum += nums[i];
             }
-        }
-
-        return sum;
-    }
-
-    private static int sum(int[] nums) {
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
         }
         return sum;
     }
